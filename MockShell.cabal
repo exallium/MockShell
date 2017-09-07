@@ -7,7 +7,7 @@ license:             BSD3
 license-file:        LICENSE
 author:              Alex Hart
 maintainer:          alex.hart658@gmail.com
-copyright:           Copyright: (c) 2016 Alex Hart
+copyright:           Copyright: (c) 2017 Alex Hart
 category:            Web
 build-type:          Simple
 cabal-version:       >=1.10

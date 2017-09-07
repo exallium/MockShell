@@ -61,15 +61,11 @@ findMock c mmocks  = mmocks >>= L.find ((==c) . Main.command)
 profile :: String -> Maybe [Mock] -> IO ()
 profile c mmocks = do
   Prelude.putStrLn $ "PROFILE :: cmd :: " <> c
-  case mmocks of
-    Nothing -> return ()
-    Just mocks -> Prelude.putStrLn $ "PROFILE :: mocks :: " <> show mocks
+  maybe (return ()) (Prelude.putStrLn . ("PROFILE :: mocks :: " <>) . show) mmocks
 
 performCmd :: MockConfig -> IO ()
 performCmd MockConfig{mockFile=Nothing, cmd=c} = callCommand c
 performCmd (MockConfig (Just fp) p c) = do
   mmocks <- loadMocks fp
   when p $ profile c mmocks
-  case findMock c mmocks of
-      Nothing -> callCommand c
-      Just mock -> Prelude.putStr $ output mock
+  maybe (callCommand c) (Prelude.putStr . output) $ findMock c mmocks

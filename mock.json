@@ -1,0 +1,6 @@
+[
+  {
+    "command": "echo \"hello world\"",
+    "output": "asdf\n"
+  }
+]
